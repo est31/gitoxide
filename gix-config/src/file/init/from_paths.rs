@@ -75,7 +75,7 @@ impl File<'static> {
                     Err(err) if !err_on_non_existing_paths && err.kind() == std::io::ErrorKind::NotFound => continue,
                     Err(err) => return Err(err.into()),
                 },
-                buf,
+                &mut *buf,
             )?;
             meta.path = Some(path);
 

@@ -99,7 +99,7 @@ fn append_followed_includes_recursively(
         }
 
         buf.clear();
-        std::io::copy(&mut std::fs::File::open(&config_path)?, buf)?;
+        std::io::copy(&mut std::fs::File::open(&config_path)?, &mut *buf)?;
         let config_meta = Metadata {
             path: Some(config_path),
             trust: meta.trust,
