@@ -96,7 +96,7 @@ fn load_config(
         Err(err) if err.kind() == std::io::ErrorKind::NotFound => return Ok(gix_config::File::new(metadata)),
         Err(err) => return Err(err.into()),
     };
-    std::io::copy(&mut file, buf)?;
+    std::io::copy(&mut file, &mut *buf)?;
 
     let config = gix_config::File::from_bytes_owned(
         buf,
